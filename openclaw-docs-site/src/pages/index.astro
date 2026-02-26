@@ -1,0 +1,17 @@
+---
+// src/pages/index.astro
+import DocPage from '../layouts/DocPage.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('docs', 'index');
+if (!entry) {
+  // Handle case where index.md doesn't exist
+  const title = 'OpenClaw 使用指南';
+  const description = '让 AI 助手成为你生活与工作中的得力伙伴';
+}
+const { Content } = await entry.render();
+---
+
+<DocPage title={entry.data.title || 'OpenClaw 使用指南'} description={entry.data.description || '让 AI 助手成为你生活与工作中的得力伙伴'}>
+  <Content />
+</DocPage>

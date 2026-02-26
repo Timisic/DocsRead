@@ -1,0 +1,100 @@
+---
+// src/components/CodeBlock.astro
+const { code, language = 'plaintext' } = Astro.props;
+---
+
+<pre class="relative">
+  <code class="language-{language}">{code}</code>
+  <button
+    class="copy-button"
+    data-code={code}
+    onclick="copyToClipboard(this)"
+    aria-label="Copy code to clipboard"
+  >
+    <span class="copy-text">Copy</span>
+  </button>
+</pre>
+
+<style>
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  pre:hover .copy-button {
+    opacity: 1;
+  }
+
+  .copy-button.copied {
+    background-color: #dcfce7;
+    color: #16a34a;
+    border-color: #bbf7d0;
+  }
+
+  .copy-button svg {
+    width: 12px;
+    height: 12px;
+  }
+</style>
+
+<script>
+  function copyToClipboard(button) {
+    const code = button.getAttribute('data-code');
+    const copyText = button.querySelector('.copy-text');
+
+    if (!navigator.clipboard) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = code;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        updateButtonState(button, copyText, true);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+        updateButtonState(button, copyText, false);
+      }
+      document.body.removeChild(textArea);
+    } else {
+      navigator.clipboard.writeText(code).then(() => {
+        updateButtonState(button, copyText, true);
+      }).catch((err) => {
+        console.error('Failed to copy: ', err);
+        updateButtonState(button, copyText, false);
+      });
+    }
+  }
+
+  function updateButtonState(button, copyText, success) {
+    if (success) {
+      copyText.textContent = 'Copied!';
+      button.classList.add('copied');
+      setTimeout(() => {
+        copyText.textContent = 'Copy';
+        button.classList.remove('copied');
+      }, 2000);
+    } else {
+      copyText.textContent = 'Failed!';
+      button.classList.add('copied');
+      setTimeout(() => {
+        copyText.textContent = 'Copy';
+        button.classList.remove('copied');
+      }, 2000);
+    }
+  }
+</script>

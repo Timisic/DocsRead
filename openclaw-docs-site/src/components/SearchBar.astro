@@ -1,0 +1,95 @@
+---
+// src/components/SearchBar.astro
+import { getCollection } from 'astro:content';
+
+// Get all documentation content for search indexing
+const docs = await getCollection('docs');
+const searchIndex = docs.map(doc => {
+  // Extract title and content preview
+  const title = doc.data.title || doc.id.replace('modules/', '').replace(/-/g, ' ');
+  const content = doc.body.substring(0, 500); // First 500 characters for preview
+
+  return {
+    id: doc.id,
+    title,
+    content,
+    url: doc.id === 'index' ? '/' : `/modules/${doc.id.replace('modules/', '')}`
+  };
+});
+const searchIndexJSON = JSON.stringify(searchIndex);
+---
+
+<div class="mb-4">
+  <input
+    type="text"
+    id="search-input"
+    placeholder="搜索文档..."
+    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+  />
+  <div id="search-results" class="mt-2 hidden bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto"></div>
+</div>
+
+<script>
+  // Client-side search implementation
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    // Search index data - injected from Astro
+    const searchIndex = JSON.parse('{searchIndexJSON}');
+
+    function highlightMatch(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<mark class="bg-yellow-200">$1</mark>');
+    }
+
+    function search(query) {
+      if (!query.trim()) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      const results = searchIndex
+        .filter(item =>
+          item.title.toLowerCase().includes(query.toLowerCase()) ||
+          item.content.toLowerCase().includes(query.toLowerCase())
+        )
+        .slice(0, 5); // Limit to 5 results
+
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="p-3 text-gray-600">未找到相关结果</div>';
+        searchResults.classList.remove('hidden');
+        return;
+      }
+
+      const html = results.map(item => {
+        const preview = item.content.substring(0, 100) + (item.content.length > 100 ? '...' : '');
+        return `
+          <a href="${item.url}" class="block p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
+            <div class="font-medium text-blue-600">${highlightMatch(item.title, query)}</div>
+            <div class="text-sm text-gray-600 mt-1">${highlightMatch(preview, query)}</div>
+          </a>
+        `;
+      }).join('');
+
+      searchResults.innerHTML = html;
+      searchResults.classList.remove('hidden');
+    }
+
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        search(e.target.value);
+      }, 300);
+    });
+
+    // Close results when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.classList.add('hidden');
+      }
+    });
+  });
+</script>

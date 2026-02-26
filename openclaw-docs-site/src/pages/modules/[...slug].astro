@@ -1,0 +1,26 @@
+---
+// src/pages/modules/[...slug].astro
+import DocPage from '../../layouts/DocPage.astro';
+import { getEntry, getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs
+    .filter((doc) => doc.id.startsWith('modules/'))
+    .map((doc) => ({
+      params: { slug: doc.id.replace('modules/', '') },
+      props: { doc },
+    }));
+}
+
+const { slug } = Astro.props;
+const doc = Astro.props.doc as any; // Type assertion to avoid TS errors
+if (!doc) {
+  return Astro.redirect('/');
+}
+const { Content } = await doc.render();
+---
+
+<DocPage title={doc.data?.title || slug} description={doc.data?.description}>
+  <Content />
+</DocPage>
