@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
   darkMode: 'class', // We'll use light mode only, so this won't be used
 }
 

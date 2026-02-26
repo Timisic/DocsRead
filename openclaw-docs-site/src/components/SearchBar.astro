@@ -5,9 +5,8 @@ import { getCollection } from 'astro:content';
 // Get all documentation content for search indexing
 const docs = await getCollection('docs');
 const searchIndex = docs.map(doc => {
-  // Extract title and content preview
   const title = doc.data.title || doc.id.replace('modules/', '').replace(/-/g, ' ');
-  const content = doc.body.substring(0, 500); // First 500 characters for preview
+  const content = doc.body.substring(0, 500);
 
   return {
     id: doc.id,
@@ -19,29 +18,32 @@ const searchIndex = docs.map(doc => {
 const searchIndexJSON = JSON.stringify(searchIndex);
 ---
 
-<div class="mb-4">
-  <input
-    type="text"
-    id="search-input"
-    placeholder="搜索文档..."
-    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-  />
-  <div id="search-results" class="mt-2 hidden bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto"></div>
+<div class="mb-6">
+  <div class="relative">
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Search documentation..."
+      class="w-full px-4 py-2 pl-10 bg-white border border-border-default rounded-md text-fg-default placeholder-fg-muted focus:outline-none focus:border-accent-fg focus:ring-1 focus:ring-accent-fg transition-colors text-sm"
+    />
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-fg-muted absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  </div>
+  <div id="search-results" class="mt-2 hidden bg-white border border-d0d7de rounded-md shadow-md max-h-80 overflow-y-auto"></div>
 </div>
 
 <script>
-  // Client-side search implementation
   document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
 
-    // Search index data - injected from Astro
-    const searchIndex = JSON.parse('{searchIndexJSON}');
+    const searchIndex = JSON.parse(`{searchIndexJSON}`);
 
     function highlightMatch(text, query) {
       if (!query) return text;
       const regex = new RegExp(`(${query})`, 'gi');
-      return text.replace(regex, '<mark class="bg-yellow-200">$1</mark>');
+      return text.replace(regex, '<mark class="search-highlight">$1</mark>');
     }
 
     function search(query) {
@@ -55,20 +57,20 @@ const searchIndexJSON = JSON.stringify(searchIndex);
           item.title.toLowerCase().includes(query.toLowerCase()) ||
           item.content.toLowerCase().includes(query.toLowerCase())
         )
-        .slice(0, 5); // Limit to 5 results
+        .slice(0, 5);
 
       if (results.length === 0) {
-        searchResults.innerHTML = '<div class="p-3 text-gray-600">未找到相关结果</div>';
+        searchResults.innerHTML = '<div class="p-4 text-57606a text-sm">未找到相关结果</div>';
         searchResults.classList.remove('hidden');
         return;
       }
 
       const html = results.map(item => {
-        const preview = item.content.substring(0, 100) + (item.content.length > 100 ? '...' : '');
+        const preview = item.content.substring(0, 120) + (item.content.length > 120 ? '...' : '');
         return `
-          <a href="${item.url}" class="block p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
-            <div class="font-medium text-blue-600">${highlightMatch(item.title, query)}</div>
-            <div class="text-sm text-gray-600 mt-1">${highlightMatch(preview, query)}</div>
+          <a href="${item.url}" class="block p-3 hover:bg-f6f8fa border-b border-d0d7de last:border-b-0 transition-colors">
+            <div class="font-medium text-0969da text-sm">${highlightMatch(item.title, query)}</div>
+            <div class="text-xs text-57606a mt-1">${highlightMatch(preview, query)}</div>
           </a>
         `;
       }).join('');
@@ -85,11 +87,43 @@ const searchIndexJSON = JSON.stringify(searchIndex);
       }, 300);
     });
 
-    // Close results when clicking outside
     document.addEventListener('click', (e) => {
       if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
         searchResults.classList.add('hidden');
       }
     });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchResults.classList.add('hidden');
+        searchInput.blur();
+      }
+    });
   });
 </script>
+
+<style>
+  :root {
+    --color-24292f: #24292f;
+    --color-57606a: #57606a;
+    --color-0969da: #0969da;
+    --color-f6f8fa: #f6f8fa;
+    --color-d0d7de: #d0d7de;
+  }
+
+  .text-24292f { color: var(--color-24292f); }
+  .text-57606a { color: var(--color-57606a); }
+  .text-0969da { color: var(--color-0969da); }
+  .bg-24292f { background-color: var(--color-24292f); }
+  .bg-57606a { background-color: var(--color-57606a); }
+  .bg-0969da { background-color: var(--color-0969da); }
+  .bg-f6f8fa { background-color: var(--color-f6f8fa); }
+  .border-d0d7de { border-color: var(--color-d0d7de); }
+  .placeholder-57606a::placeholder { color: var(--color-57606a); }
+
+  .search-highlight {
+    background-color: #fbdf96;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+</style>

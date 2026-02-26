@@ -3,20 +3,22 @@
 import DocsLayout from './DocsLayout.astro';
 import DocsSidebar from '../components/DocsSidebar.astro';
 import SearchBar from '../components/SearchBar.astro';
+import CodeBlock from '../components/CodeBlock.astro';
 
 const { title, description } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
 <DocsLayout title={title} description={description}>
-  <div class="flex min-h-screen">
+  <CodeBlock />
+  <div class="min-h-screen">
     <!-- Desktop sidebar -->
-    <div class="hidden md:block">
+    <div class="hidden md:block fixed top-0 left-0 h-full z-10">
       <DocsSidebar currentPath={currentPath} />
     </div>
 
     <!-- Mobile sidebar toggle -->
-    <div class="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-10">
+    <div class="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-20">
       <div class="flex items-center justify-between p-4">
         <h1 class="text-lg font-semibold">OpenClaw 使用指南</h1>
         <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-gray-100">
@@ -28,7 +30,7 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile sidebar -->
-    <div id="mobile-sidebar" class="md:hidden fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 transform -translate-x-full transition-transform duration-300 ease-in-out z-20">
+    <div id="mobile-sidebar" class="md:hidden fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 transform -translate-x-full transition-transform duration-300 ease-in-out z-30">
       <div class="p-4 border-b border-gray-200">
         <button id="mobile-menu-close" class="p-2 rounded-md hover:bg-gray-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,10 +42,10 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile overlay -->
-    <div id="mobile-overlay" class="md:hidden fixed inset-0 bg-black bg-opacity-50 hidden z-10"></div>
+    <div id="mobile-overlay" class="md:hidden fixed inset-0 bg-black bg-opacity-50 hidden z-25"></div>
 
     <!-- Main content -->
-    <main class="main-content md:ml-0 ml-0 md:mt-0 mt-16">
+    <main class="prose prose-gray max-w-none md:ml-[280px] ml-0 md:mt-0 mt-16 p-8 md:p-12">
       <SearchBar />
       <slot />
     </main>
