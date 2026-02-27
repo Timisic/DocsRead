@@ -8,7 +8,7 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 1
+- **Total Sessions**: 2
 - **Last Active**: 2026-02-27
 <!-- @@@/auto:current-status -->
 
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~38 | Active |
+| `journal-1.md` | ~85 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits |
 |---|------|-------|---------|
+| 2 | 2026-02-27 | 配置 Antigravity Workflows 与修复 Markdown 代码块渲染 | `e224b64`, `1121b38`, `655ca97`, `5e1ac85` |
 | 1 | 2026-02-27 | Add Tailwind Typography for GitHub-style Markdown | `f9a0254` |
 <!-- @@@/auto:session-history -->
 
