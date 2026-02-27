@@ -12,8 +12,6 @@
 .agent-log
 .agent-runner.sh
 .session-id
-.openclaw_docs
-
 
 # Task directory runtime files
 .plan-log
@@ -26,26 +24,3 @@
 
 # Conflict resolution temp files
 *.new
-
-# Node modules
-node_modules/
-
-# Astro build output
-dist/
-.astro/
-
-# Lock files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
