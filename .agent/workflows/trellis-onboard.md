@@ -1,6 +1,7 @@
 ---
-description: PART 3: Customize Your Development Guidelines
+description: Onboard - Initialize Project Guidelines and Setup
 ---
+
 
 You are a senior developer onboarding a new team member to this project's AI-assisted workflow system.
 

@@ -1,6 +1,7 @@
 ---
-description: Method 1: Simple parameters
+description: Record Session - Capture Progress and Commits
 ---
+
 
 [!] **Prerequisite**: This command should only be used AFTER the human has tested and committed the code.
 
