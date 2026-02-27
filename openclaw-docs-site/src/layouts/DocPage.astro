@@ -2,7 +2,6 @@
 // src/layouts/DocPage.astro
 import DocsLayout from './DocsLayout.astro';
 import DocsSidebar from '../components/DocsSidebar.astro';
-import SearchBar from '../components/SearchBar.astro';
 
 const { title, description } = Astro.props;
 const currentPath = Astro.url.pathname;
@@ -230,7 +229,6 @@ const currentPath = Astro.url.pathname;
 
     <!-- Main content -->
     <main class="prose prose-gray max-w-none md:ml-[280px] ml-0 md:mt-0 mt-16 p-8 md:p-12">
-      <SearchBar />
       <slot />
     </main>
   </div>

@@ -4,16 +4,13 @@ title: 聊天平台配置
 
 # 聊天平台配置
 
-OpenClaw 支持多个聊天平台，你可以选择最常用的一个来使用。
 
----
+## 常用平台
 
-## 支持的平台
-
-| 平台 | 特点 | 适合人群 |
-|-----|------|---------|
-| **飞书** | 功能丰富，国内访问快 | 国内用户、企业用户 |
-| **Discord** | 社区活跃，开发者友好 | 开发者、海外用户 |
+| 平台 | 特点 |
+|-----|------|
+| **飞书** | 功能丰富，国内访问快 | 
+| **Discord** | 对OpenClaw支持完整 | 
 
 ---
 
@@ -134,18 +131,12 @@ Discord 是开发者社区最常用的平台，OpenClaw 对 Discord 有完整的
 
 ---
 
-## Discord 频道示例
-
-现在在 Discord 服务器上创建一些频道并开始聊天。你的代理可以看到频道名称，每个频道都有自己独立的会话 - 所以你可以设置 `#coding`、`#home`、`#research` 或任何符合你工作流的频道。
-
----
-
 ## 官方文档链接
 
 如果需要更详细的配置说明，请查阅 OpenClaw 官方文档：
 
-- **Discord**：[openclaw/docs/channels/discord.md](https://github.com/openclaw/openclaw/blob/main/docs/channels/discord.md)
-- **飞书**：[openclaw/docs/channels/feishu.md](https://github.com/openclaw/openclaw/blob/main/docs/channels/feishu.md)
+- **Discord**：[openclaw/docs/channels/discord.md](https://github.com/openclaw/openclaw/blob/main/docs/zh-CN/channels/discord.md)
+- **飞书**：[openclaw/docs/channels/feishu.md](https://github.com/openclaw/openclaw/blob/main/docs/zh-CN/channels/feishu.md)
 
 ---
 
