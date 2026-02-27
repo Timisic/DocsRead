@@ -7,7 +7,7 @@ import { rehypeCopyButton } from './src/plugins/rehype-copy-button.js';
 export default defineConfig({
   output: 'static',
   integrations: [tailwind()],
-  site: 'https://openclaw-docs.example.com', // 上线 Vercel 后换成真实域名
+  site: 'https://docs-read.vercel.app/', // 上线 Vercel 后换成真实域名
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [],
