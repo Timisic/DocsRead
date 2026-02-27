@@ -13,6 +13,8 @@
 .agent-runner.sh
 .session-id
 .openclaw_docs
+openclaw_docs/
+
 
 
 # Task directory runtime files
