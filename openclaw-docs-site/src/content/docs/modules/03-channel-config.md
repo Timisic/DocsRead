@@ -31,6 +31,8 @@ title: 聊天平台配置
 - 如果你的版本使用其他配置格式，请以官方文档为准。
 - 配置前建议先阅读 [核心原则：查阅 Docs](./04-core-principles.md)。
 
+> 注意：涉及 Token 的配置只在本机终端或私密会话中进行，不要在群聊中发送凭证信息。
+
 ---
 
 ## Discord 配置（推荐）
@@ -40,7 +42,7 @@ title: 聊天平台配置
 ### 前置条件
 
 - 已有 Discord 账号
-- 已创建或加入一个你可管理的 Discord 频道（channel）
+- 已有一个你可管理的 Discord 服务器（Server）
 
 ### 第 1 步：创建 Discord 应用和 Bot
 
@@ -61,6 +63,12 @@ title: 聊天平台配置
 
 在 **Bot** 页面点击 **Reset Token**（首次创建也通过这个入口拿 token）。
 
+成功信号（示例）：
+
+```text
+You have a new token. Make sure to copy it now.
+```
+
 ### 第 4 步：邀请 Bot 进入你的服务器
 
 1. 进入左侧 **OAuth2** -> **URL Generator**
@@ -74,7 +82,14 @@ title: 聊天平台配置
    - Embed Links
    - Attach Files
 4. 复制生成 URL 并在浏览器打开
-5. 选择目标频道（前面必须先创建频道）并完成授权
+5. 选择目标服务器并完成授权
+
+成功信号（示例）：
+
+```text
+Authorized
+The bot was added to your server.
+```
 
 ### 第 5 步：写入 OpenClaw 配置
 
@@ -103,6 +118,12 @@ title: 聊天平台配置
 openclaw gateway restart
 ```
 
+成功信号（示例）：
+
+```text
+gateway restarted
+```
+
 ---
 
 ## 服务器模式（可选）
@@ -125,6 +146,22 @@ openclaw gateway restart
 
 ```text
 请仅在这个私有服务器中关闭“必须 @ 才回复”的限制，不影响其他服务器。
+```
+
+---
+
+## 飞书最小流程（3 步）
+
+如果你用飞书，可以先走最小链路：
+
+1. 按官方文档创建飞书应用并拿到必要凭证。
+2. 写入 `~/.openclaw/openclaw.json` 的飞书渠道配置字段。
+3. 重启网关并在飞书中发送测试消息验证。
+
+对 AI 说的话（可复用）：
+
+```text
+请查阅 docs/channels/feishu.md，按最小可用方案帮我配置飞书通道，修改后给我 diff，并告诉我如何验证是否收发成功。
 ```
 
 ---

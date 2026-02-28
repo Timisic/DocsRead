@@ -64,6 +64,17 @@ OpenClaw 的 **workspace（工作空间）** 是助手的“家”和“记忆�
 - 名字、职业、时区
 - 交流方式和偏好
 
+最小可用示例（`~/.openclaw/workspace/USER.md`）：
+
+```md
+# User Profile
+- Name: Hong
+- Timezone: Asia/Shanghai
+- Preferred Language: zh-CN
+- Communication Style: 先给结论，再给步骤
+- Engineering Preference: 变更前先给 diff，确认后执行
+```
+
 ### IDENTITY.md - 助手身份
 
 定义助手的名字、风格和 emoji：

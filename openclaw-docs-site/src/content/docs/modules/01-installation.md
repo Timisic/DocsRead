@@ -6,6 +6,8 @@ title: 安装与部署
 
 OpenClaw 的部署方式灵活，本章给你一套最稳妥的本机安装流程。
 
+> 注意：不同版本的配置项和命令细节可能有差异，若与官方文档冲突，请以官方 docs 为准。
+
 ---
 
 ## 本章产出
@@ -65,6 +67,12 @@ npm -v
 npm install -g openclaw@latest
 ```
 
+成功信号（示例）：
+
+```text
+added 1 package in 8s
+```
+
 ### 第 2 步：运行 onboarding 向导
 
 ```bash
@@ -87,6 +95,14 @@ openclaw --version
 
 # 查看 Gateway 状态
 openclaw gateway status
+```
+
+成功信号（示例）：
+
+```text
+openclaw x.y.z
+gateway: running
+url: http://127.0.0.1:18789/
 ```
 
 或者直接访问本地的 Web 界面：

@@ -6,6 +6,8 @@ title: 配置管理与维护
 
 本章聚焦“如何长期稳定维护配置”，避免越改越乱。
 
+> 注意：本章示例按 `~/.openclaw/openclaw.json` 编写；如果你使用的版本结构不同，以官方 docs 为准。
+
 ---
 
 ## 本章产出
@@ -51,6 +53,13 @@ cd ~/.openclaw
 git log --oneline -n 20
 ```
 
+成功信号（示例）：
+
+```text
+a1b2c3d chore: update channel and skill settings
+9f8e7d6 chore: initial openclaw config snapshot
+```
+
 ---
 
 ## 2) 安全回滚（优先使用 revert）
@@ -65,6 +74,18 @@ git log --oneline -n 20
 git revert <commit_hash>
 ```
 
+成功信号（示例）：
+
+```text
+[main 1a2b3c4] Revert "chore: update channel and skill settings"
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+```
+
+何时用 `revert`，何时开新分支修复：
+
+- 变更已提交并希望安全撤销：优先 `git revert`
+- 要做较大修复、涉及多轮验证：开新分支修复后再合并
+
 ---
 
 ## 3) 关键文件备份
@@ -76,6 +97,12 @@ git revert <commit_hash>
 ```bash
 cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.backup.json
 cp -r ~/.openclaw/workspace ~/.openclaw/workspace.backup
+```
+
+成功信号（示例）：
+
+```text
+# 无输出即成功；可用 ls ~/.openclaw 验证备份文件存在
 ```
 
 ---
