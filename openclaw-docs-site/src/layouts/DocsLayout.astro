@@ -1,6 +1,7 @@
 ---
 // src/layouts/DocsLayout.astro
 import '../styles/global.css';
+import '../styles/typography.css';
 ---
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ import '../styles/global.css';
     <title>{Astro.props.title || 'OpenClaw 使用指南'}</title>
     <meta name="description" content={Astro.props.description || 'OpenClaw AI 助手框架使用指南'} />
   </head>
-  <body class="bg-white text-gray-800">
+  <body>
     <slot />
   </body>
 </html>

@@ -1,41 +1,27 @@
-/*
-  src/styles/global.css
-  GitHub-inspired markdown rendering styles
-*/
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ========================================
-   Base Styles
-   ======================================== */
 :root {
-  --color-canvas-default: #ffffff;
-  --color-canvas-subtle: #f6f8fa;
-  --color-border-default: #d0d7de;
-  --color-border-muted: #d8dee4;
-  --color-fg-default: #24292f;
-  --color-fg-muted: #57606a;
-  --color-accent-fg: #0969da;
-  --color-link-primary: #0969da;
-  --color-link-visited: #0969da;
-  --color-success-fg: #1a7f37;
-  --color-attention-fg: #9a6700;
-  --color-danger-fg: #cf222e;
-  --color-neutral-muted: #6e778166;
-  --color-prettylights-syntax-comment: #6e7781;
-  --color-prettylights-syntax-constant: #0550ae;
-  --color-prettylights-syntax-entity: #8250df;
-  --color-prettylights-syntax-storage-modifier-import: #24292f;
-  --color-prettylights-syntax-entity-tag: #116329;
-  --color-prettylights-syntax-keyword: #cf222e;
-  --color-prettylights-syntax-string: #0a3069;
-  --color-prettylights-syntax-variable: #953800;
+  --background: #ffffff;
+  --foreground: #282728;
+  --foreground-muted: #606060;
+  --accent: #006cac;
+  --accent-strong: #055785;
+  --border: #ece9e9;
+  --panel-bg: #ffffff;
+  --panel-bg-soft: #f6f6f6;
+  --inline-code-bg: #eef2f8;
+  --code-bg: #3a3f46;
+  --code-fg: #edf1f5;
 }
 
 * {
   box-sizing: border-box;
+  scrollbar-width: auto;
+  scrollbar-color: var(--border) transparent;
 }
 
 html {
@@ -43,152 +29,108 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif,
-               'Apple Color Emoji', 'Segoe UI Emoji';
-  line-height: 1.5;
-  color: var(--color-fg-default);
-  background-color: var(--color-canvas-default);
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Google Sans Code", "JetBrains Mono", "Noto Sans SC", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  line-height: 1.6;
   font-size: 16px;
-  word-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ========================================
-   Sidebar Styling
-   ======================================== */
+a,
+button {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px dashed var(--accent);
+  outline-offset: 2px;
+}
+
+.docs-shell {
+  min-height: 100vh;
+}
+
+.docs-main {
+  margin-left: 0;
+  margin-top: 64px;
+  padding: 2rem 1.25rem;
+}
+
+.docs-main-inner {
+  margin: 0 auto;
+  max-width: 860px;
+}
+
 .sidebar {
   width: 280px;
   height: 100vh;
   overflow-y: auto;
-  background: var(--color-canvas-default);
-  border-right: 1px solid var(--color-border-default);
+  border-right: 1px solid var(--border);
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  backdrop-filter: blur(10px);
 }
 
 .sidebar h2 {
-  padding: 1rem;
-  font-size: 1rem;
+  margin: 0;
+  padding: 1.125rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+  font-size: 0.95rem;
   font-weight: 600;
-  border-bottom: 1px solid var(--color-border-default);
-  color: var(--color-fg-default);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .sidebar ul {
-  list-style: none;
-  padding: 0.5rem;
   margin: 0;
-}
-
-.sidebar li {
-  padding: 0;
+  list-style: none;
+  padding: 0.75rem 0.5rem;
 }
 
 .sidebar a {
-  text-decoration: none;
-  color: var(--color-fg-muted);
   display: block;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
-  transition: all 0.15s ease;
-  font-size: 0.9375rem;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  color: var(--foreground-muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+  line-height: 1.45;
 }
 
 .sidebar a:hover {
-  background-color: var(--color-canvas-subtle);
-  color: var(--color-fg-default);
+  background: var(--panel-bg-soft);
+  color: var(--foreground);
 }
 
 .sidebar a.active {
-  background-color: #dbeafe;
-  color: var(--color-accent-fg);
-  font-weight: 500;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
+  background: color-mix(in srgb, var(--accent) 12%, white);
+  color: var(--accent-strong);
+  font-weight: 600;
 }
 
-/* ========================================
-   Main Content Container
-   ======================================== */
-
-/* ========================================
-   Code Block Components
-   ======================================== */
-.code-wrapper {
-  margin-bottom: 24px;
+.mobile-topbar {
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
 }
 
-.code-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 16px;
-  background-color: var(--color-canvas-subtle);
-  border: 1px solid var(--color-border-default);
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
+.mobile-sidebar {
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border);
 }
 
-.language-label {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--color-fg-muted);
-  text-transform: uppercase;
-  font-family: 'ui-monospace', 'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono',
-               'monospace';
+.mobile-overlay {
+  background: rgba(17, 24, 39, 0.45);
 }
 
-.copy-button {
-  background-color: transparent;
-  border: 1px solid var(--color-border-default);
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 12px;
-  cursor: pointer;
-  color: var(--color-fg-muted);
-  transition: all 0.15s ease;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 500;
-}
-
-.copy-button:hover {
-  background-color: var(--color-canvas-subtle);
-  color: var(--color-fg-default);
-}
-
-.copy-button.copied {
-  background-color: #dafbe1;
-  color: var(--color-success-fg);
-  border-color: #2da44e;
-}
-
-.copy-button svg {
-  width: 14px;
-  height: 14px;
-}
-
-
-/* ========================================
-   Mobile Responsive
-   ======================================== */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-  }
-}
-
-/* ========================================
-   Utility Classes
-   ======================================== */
-.text-muted {
-  color: var(--color-fg-muted) !important;
-}
-
-.bg-subtle {
-  background-color: var(--color-canvas-subtle) !important;
-}
-
-/* Custom scrollbar for sidebar */
 .sidebar::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 
 .sidebar::-webkit-scrollbar-track {
@@ -196,16 +138,18 @@ body {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: var(--color-border-default);
-  border-radius: 4px;
+  background: #d6d6d6;
+  border-radius: 999px;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-fg-muted);
+  background: #bcbcbc;
 }
 
-/* Smooth transitions */
-a,
-button {
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+@media (min-width: 768px) {
+  .docs-main {
+    margin-left: 280px;
+    margin-top: 0;
+    padding: 2.25rem 2.5rem;
+  }
 }

@@ -1,0 +1,193 @@
+.app-prose {
+  @apply prose prose-neutral max-w-none text-base leading-7;
+  color: var(--foreground);
+}
+
+.app-prose h1,
+.app-prose h2,
+.app-prose h3,
+.app-prose h4,
+.app-prose th {
+  color: var(--foreground);
+}
+
+.app-prose h1 {
+  @apply mb-4 text-3xl font-bold md:text-4xl;
+  letter-spacing: -0.025em;
+}
+
+.app-prose h2 {
+  @apply mb-3 mt-10 text-2xl font-semibold;
+  letter-spacing: -0.015em;
+}
+
+.app-prose h3 {
+  @apply mb-2 mt-8 text-xl font-semibold italic;
+}
+
+.app-prose h4 {
+  @apply mb-2 mt-6 text-lg font-semibold;
+}
+
+.app-prose p,
+.app-prose ol,
+.app-prose ul,
+.app-prose li,
+.app-prose strong,
+.app-prose em,
+.app-prose figcaption,
+.app-prose table,
+.app-prose code {
+  color: var(--foreground);
+}
+
+.app-prose a {
+  color: var(--accent);
+  text-decoration-style: dashed;
+  text-underline-offset: 4px;
+  word-break: break-word;
+  transition: color 0.15s ease;
+}
+
+.app-prose a:hover {
+  color: var(--accent-strong);
+}
+
+.app-prose li::marker {
+  color: var(--accent);
+}
+
+.app-prose hr {
+  border-color: var(--border);
+}
+
+.app-prose img {
+  @apply mx-auto rounded-lg;
+  border: 1px solid var(--border);
+}
+
+.app-prose figcaption {
+  @apply text-sm;
+  color: var(--foreground-muted);
+}
+
+.app-prose table {
+  border-collapse: collapse;
+}
+
+.app-prose table th,
+.app-prose table td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+}
+
+.app-prose table th {
+  @apply py-2;
+  background: var(--panel-bg-soft);
+}
+
+.app-prose :not(pre) > code {
+  @apply rounded px-1.5 py-1;
+  word-break: break-word;
+  background: var(--inline-code-bg);
+  color: var(--foreground);
+}
+
+.app-prose code::before,
+.app-prose code::after {
+  content: none;
+}
+
+.app-prose blockquote {
+  @apply not-italic;
+  border-inline-start: 3px solid color-mix(in srgb, var(--accent) 80%, white);
+  color: var(--foreground-muted);
+}
+
+.app-prose pre {
+  @apply rounded-lg p-0;
+  border: none;
+  background: transparent;
+}
+
+.app-prose .heading-link {
+  @apply ml-2 no-underline opacity-0 transition-opacity;
+  color: color-mix(in srgb, var(--accent) 75%, var(--foreground));
+}
+
+.app-prose h2:hover .heading-link,
+.app-prose h3:hover .heading-link,
+.app-prose h4:hover .heading-link,
+.app-prose h5:hover .heading-link,
+.app-prose h6:hover .heading-link,
+.app-prose h2:focus-within .heading-link,
+.app-prose h3:focus-within .heading-link,
+.app-prose h4:focus-within .heading-link,
+.app-prose h5:focus-within .heading-link,
+.app-prose h6:focus-within .heading-link {
+  @apply opacity-100;
+}
+
+.code-block {
+  @apply relative my-5 overflow-hidden rounded-lg;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.code-block pre {
+  @apply m-0 overflow-x-auto p-4 pr-14 text-sm;
+  line-height: 1.65;
+  color: var(--code-fg) !important;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.code-block pre code {
+  @apply grid bg-transparent p-0;
+  color: inherit;
+  font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  white-space: pre;
+}
+
+.code-block .line {
+  @apply inline-block min-w-full;
+  min-height: 1rem;
+}
+
+.code-block .line--highlighted {
+  @apply inline-block w-full;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.copy-btn {
+  @apply absolute right-2 top-2 z-10 flex items-center justify-center rounded border p-1.5 opacity-0;
+  border-color: color-mix(in srgb, var(--border) 55%, white);
+  background: color-mix(in srgb, var(--background) 70%, black 10%);
+  pointer-events: none;
+  transition: all 0.15s ease;
+}
+
+.code-block:hover .copy-btn {
+  @apply opacity-100;
+  pointer-events: auto;
+}
+
+.copy-btn:hover {
+  background: color-mix(in srgb, var(--background) 85%, var(--accent) 15%);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.copy-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: color-mix(in srgb, var(--foreground) 70%, white);
+  transition: fill 0.15s ease;
+}
+
+.copy-btn:hover svg {
+  fill: var(--foreground);
+}
+
+.copy-btn.copied svg {
+  fill: #1a7f37;
+}
