@@ -4,9 +4,17 @@ title: 安装与部署
 
 # 安装与部署
 
-OpenClaw 的部署方式灵活，你可以根据自己的需求选择最合适的部署方案。
+OpenClaw 的部署方式灵活，本章给你一套最稳妥的本机安装流程。
 
-https://github.com/openclaw/openclaw
+---
+
+## 本章产出
+
+完成本章后，你应该已经：
+
+- 安装好 OpenClaw 并完成 onboarding
+- 能通过命令确认 Gateway 正常运行
+- 确认了配置目录与 workspace 目录位置
 
 ---
 
@@ -15,7 +23,17 @@ https://github.com/openclaw/openclaw
 在安装 OpenClaw 之前，请确保：
 
 - [ ] 已安装 **Node 22 或更高版本**
-- [ ] 有一个 GitHub 账号
+- [ ] 可访问 npm
+- [ ] （可选）有 GitHub 账号，用于提 Issue、看示例和同步社区资源
+
+### 终端命令（环境检查）
+
+```bash
+node -v
+npm -v
+```
+
+合格示例：`node -v` 输出 `v22.x` 或更高。
 
 ### AI 模型的 API Key（可选）
 
@@ -26,19 +44,20 @@ https://github.com/openclaw/openclaw
 3. **阿里云百炼**（国内多种模型，便宜量大，lite版目前7.9元/月足够用）
    - 控制台：https://bailian.console.aliyun.com/cn-beijing/#/home
 
-> **提示**：也可以在安装完成后再配置 AI 模型。
+- 仅体验安装流程时，可以先跳过 API Key。
+- 要真正调用云端模型执行任务时，必须提供对应 API Key。
+
+---
+
+## 官方项目地址
+
+- GitHub 仓库：[openclaw/openclaw](https://github.com/openclaw/openclaw)
 
 ---
 
 ## 详细安装步骤
 
-### 第 1 步：了解项目
-
-OpenClaw 的 GitHub 地址：https://github.com/openclaw/openclaw
-
-先浏览官方文档了解整体架构，也可以直接参考官方安装说明
-
-### 第 2 步：安装 OpenClaw
+### 第 1 步：安装 OpenClaw CLI
 
 使用 npm 全局安装：
 
@@ -46,7 +65,7 @@ OpenClaw 的 GitHub 地址：https://github.com/openclaw/openclaw
 npm install -g openclaw@latest
 ```
 
-### 第 3 步：运行 onboarding 向导
+### 第 2 步：运行 onboarding 向导
 
 ```bash
 openclaw onboard --install-daemon
@@ -60,7 +79,7 @@ openclaw onboard --install-daemon
   - 配置 Gateway 设置
   - 可选的聊天平台配置
 
-### 第 4 步：验证安装
+### 第 3 步：验证安装
 
 ```bash
 # 查看 OpenClaw 版本
@@ -73,6 +92,14 @@ openclaw gateway status
 或者直接访问本地的 Web 界面：
 
 - 打开浏览器访问：**http://127.0.0.1:18789/**
+
+---
+
+## 常见失败点（快速排查）
+
+- `openclaw: command not found`：确认 npm 全局安装目录在 PATH 中。
+- Gateway 未启动：先执行 `openclaw gateway status`，必要时 `openclaw gateway restart`。
+- onboarding 中断：重新运行 `openclaw onboard --install-daemon`。
 
 ---
 

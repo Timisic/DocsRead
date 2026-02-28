@@ -7,6 +7,25 @@ description: 让 AI 助手成为你生活与工作中的得力伙伴
 
 ---
 
+## 你将获得什么
+
+读完本指南后，你可以完成以下目标：
+
+- 在本机完成 OpenClaw 安装与验证
+- 配置 Workspace（SOUL/USER/AGENTS 等核心文件）
+- 连接 Discord 或飞书并开始日常使用
+- 跑通“自动化论文推送”和“远程代码编写”两个典型场景
+
+---
+
+## 阅读前约定
+
+- 本指南中的配置示例默认使用 `~/.openclaw/openclaw.json`。
+- 不同版本 OpenClaw 可能有配置差异；如果冲突，请以官方文档为准。
+- 配置类操作建议先阅读 [核心原则：查阅 Docs](./modules/04-core-principles.md)。
+
+---
+
 ## 目录
 
 - [安装与部署](./modules/01-installation.md)
@@ -34,15 +53,8 @@ OpenClaw 是一个强大的 AI 助手框架，它允许你通过聊天平台（�
 
 ## 快速开始
 
-```bash
-# 1. 安装
-npm install -g openclaw@latest
-
-# 2. 初始化并安装守护进程
-openclaw onboard --install-daemon
-```
-
-> **注意**：需要 Node.js 环境。未安装请访问 [Node.js 官网](https://nodejs.org/)。
+- 如果你是第一次使用，请直接从 [安装与部署](./modules/01-installation.md) 开始。
+- 安装章节里包含完整命令、验证步骤与常见排错。
 
 ---
 

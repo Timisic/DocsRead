@@ -4,87 +4,113 @@ title: 配置管理与维护
 
 # 配置管理与维护
 
-## OpenClaw 的"双刃剑"特性
+本章聚焦“如何长期稳定维护配置”，避免越改越乱。
 
-### 好处
-
-- 可以完全定制你需要的功能
-- 能适应各种特殊场景
-- 随着你的需求变化而调整
-
-### 风险
-
-- 不当的修改会导致系统越来越难用
-- 一次错误的修改可能让整个系统崩溃 => `openclaw doctor`
 ---
 
-## 最佳实践
+## 本章产出
 
-### 1. 版本控制（最重要）
+完成本章后，你应该已经：
 
-用 Git 管理你的配置，这是最基础也是最重要的习惯。
+- 用 Git 管理 `~/.openclaw` 配置目录
+- 建立“修改 -> 验证 -> 回滚”的最小闭环
+- 知道如何安全回退错误配置
 
-#### 初始化
+---
+
+## 先统一一个原则
+
+配置变更前，先按 [核心原则：查阅 Docs](./04-core-principles.md) 执行。  
+本章不重复讲“为什么查文档”，只讲如何管理变更。
+
+---
+
+## 1) 用 Git 管理配置目录（最重要）
+
+### 终端命令：初始化
 
 ```bash
 cd ~/.openclaw
 git init
 git add .
-git commit -m "Initial configuration"
+git commit -m "chore: initial openclaw config snapshot"
 ```
 
-#### 每次修改前提交
+### 终端命令：每次改动后提交
 
 ```bash
-git commit -am "Updated news push configuration"
+cd ~/.openclaw
+git add .
+git commit -m "chore: update channel and skill settings"
 ```
 
-#### 查看历史
+### 终端命令：查看历史
 
 ```bash
-git log --oneline
+cd ~/.openclaw
+git log --oneline -n 20
 ```
 
-#### 回退到之前的状态
+---
+
+## 2) 安全回滚（优先使用 revert）
+
+不要直接 `git checkout HEAD~1`。对多数用户，更安全的是用 `git revert` 生成反向提交。
+
+### 终端命令：回滚指定提交
 
 ```bash
-git checkout HEAD~1
+cd ~/.openclaw
+git log --oneline -n 20
+git revert <commit_hash>
 ```
 
-### 2. 逐步修改
+---
 
-不要一次性修改太多东西，每次只做一个小改动。
+## 3) 关键文件备份
 
-明确、具体、可追溯。
+本指南默认主配置文件为 `~/.openclaw/openclaw.json`。
 
-### 3. 查阅文档
-
-始终让 AI 查阅官方文档，确保配置的正确性。
+### 终端命令：手动备份
 
 ```bash
-"请查阅 /docs/ 下关于 XX 的文档，然后按照文档帮我修改配置"
+cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.backup.json
+cp -r ~/.openclaw/workspace ~/.openclaw/workspace.backup
 ```
 
-### 4. 备份关键配置
+---
 
-定期备份重要的配置文件。
+## 4) 每次修改建议采用同一流程
 
-```bash
-cp ~/.openclaw/config.yaml ~/.openclaw/config.backup
+1. 先说明目标（只改一个功能点）
+2. 让 AI 先给修改计划和 diff
+3. 你确认后再写入
+4. 立即验证功能
+5. 通过后再提交 Git
+
+### 对 AI 说的话
+
+```text
+请先查阅相关 docs，再给我最小修改方案和 diff。
+我确认后再执行写入，写入后给验证步骤。
 ```
 
-### 5. 定期清理
+---
 
-定期检查并清理不用的配置。
+## 5) 定期清理
 
-```bash
-"帮我检查一下配置，有哪些是现在不用的，可以清理掉"
+### 对 AI 说的话
+
+```text
+请审查 ~/.openclaw 当前配置，列出：
+1) 已废弃或未使用的字段
+2) 可简化的重复配置
+3) 建议删除项（不要直接删除）
 ```
 
 ---
 
 ## 下一步
 
-了解配置管理后，你可以：
-- 查看 [常见问题](./09-faq.md)
-- 或者回到 [索引](../index.md) 继续其他章节
+- [常见问题](./09-faq.md)
+- [回到索引](../index.md)
