@@ -62,8 +62,14 @@
 }
 
 .app-prose img {
-  @apply mx-auto rounded-lg;
+  @apply block mx-auto rounded-lg;
+  max-width: min(100%, 860px);
+  height: auto;
   border: 1px solid var(--border);
+}
+
+.app-prose .doc-image-figure {
+  @apply my-6;
 }
 
 .app-prose figcaption {

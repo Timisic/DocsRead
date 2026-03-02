@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import rehypePrettyCode from 'rehype-pretty-code';
 import { rehypeCopyButton } from './src/plugins/rehype-copy-button.js';
+import { rehypeImageEnhance } from './src/plugins/rehype-image-enhance.js';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +13,7 @@ export default defineConfig({
     syntaxHighlight: false,
     remarkPlugins: [],
     rehypePlugins: [
+      rehypeImageEnhance,
       [
         rehypePrettyCode,
         {
