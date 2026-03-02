@@ -5,6 +5,15 @@ import { getCollection } from 'astro:content';
 const { currentPath } = Astro.props;
 const docs = await getCollection('docs');
 
+const normalizePath = (path) => {
+  if (!path || path === '/') return '/';
+  const [pathname] = String(path).split(/[?#]/);
+  const normalized = pathname.replace(/\/+$/, '');
+  return normalized || '/';
+};
+
+const normalizedCurrentPath = normalizePath(currentPath);
+
 // Sort docs by filename to maintain order (01-, 02-, etc.)
 const sortedDocs = docs
   .filter(doc => doc.id.startsWith('modules/'))
@@ -39,15 +48,14 @@ const getDocTitle = (doc) => {
       <li>
         <a
           href="/"
-          class:list={["block", { "active": currentPath === "/" }]}
+          class:list={["block", { "active": normalizedCurrentPath === "/" }]}
         >
           首页
         </a>
       </li>
       {sortedDocs.map(doc => {
         const href = `/modules/${doc.id.replace('modules/', '')}`;
-        const isActive = currentPath === href ||
-                         (currentPath === '/' && href === '/modules/01-installation');
+        const isActive = normalizedCurrentPath === normalizePath(href);
         return (
           <li>
             <a
