@@ -22,6 +22,7 @@ description: 让 AI 助手成为你生活与工作中的得力伙伴
 ## 阅读前
 
 - 本指南中的配置示例默认使用 `~/.openclaw/openclaw.json`。
+- 如需对照官方原始文档，可参考 [OpenClaw 官方 Docs（zh-CN）](https://docs.openclaw.ai/zh-CN)。
 - 配置类操作建议先阅读 [核心原则：查阅 Docs](./modules/04-core-principles.md)。
 
 ---
