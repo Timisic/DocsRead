@@ -121,6 +121,8 @@ url: http://127.0.0.1:18789/
   - 或者访问 http://127.0.0.1:18789/
 - [ ] Workspace 目录已创建（通常在 `~/.openclaw/workspace`）
 
+<img src="https://timisic.oss-cn-hangzhou.aliyuncs.com/pic/image-20260304102831261.png" alt="image-20260304102831261" style="zoom:33%;" />
+
 ---
 
 ## 更新 OpenClaw

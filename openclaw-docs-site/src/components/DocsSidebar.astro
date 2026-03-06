@@ -28,12 +28,14 @@ const getDocTitle = (doc) => {
   if (doc.data.title) return doc.data.title;
   const filename = doc.id.replace('modules/', '');
   const titleMap = {
+    '00-terms': '术语速查表',
     '01-installation': '安装与部署',
     '02-soul-config': 'SOUL.md 配置',
     '03-channel-config': '聊天平台配置',
     '04-core-principles': '核心原则：查阅 Docs',
     '05-scenario-news': '场景一：自动化论文推送',
     '06-scenario-coding': '场景二：远程代码编写',
+    '07-safety-and-fit': '安全、风险与是否值得使用',
     '08-config-management': '配置管理与维护',
     '09-faq': '常见问题'
   };
