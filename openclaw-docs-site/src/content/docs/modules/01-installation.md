@@ -43,11 +43,11 @@ npm -v
 
 在安装 OpenClaw 时，onboarding 流程会让你选择和配置 AI 模型。支持的模型提供商包括：
 
-1. **OpenAI**（GPT 系列）
-2. **Anthropic**（Claude 系列）
+1. **OpenAI**（GPT 系列）：速度较慢质量高，20$订阅Token多
+2. **Anthropic**（Claude 系列）：速度快质量高，但易封号，20$订阅Token少
 3. **阿里云百炼**（国内多种模型，便宜量大，lite版目前7.9元/月足够用）
    - 控制台：https://bailian.console.aliyun.com/cn-beijing/#/home
-> 依旧最推荐 Claude 相关作为模型。目前这个 Coding Plan 输出速度比较慢，体验感较差；同时，阿里已经明确会留存你的数据用于训练，因此数据敏感，不要使用这个 Coding Plan。
+> 依旧最推荐 Claude / GPT 作为模型。目前这个 Coding Plan 输出速度比较慢，体验感较差；同时，阿里已经明确会留存你的数据用于训练，因此数据敏感且重要的话，不要使用这个 Coding Plan。
 
 - 仅体验安装流程时，可以先跳过 API Key。
 - 要真正调用云端模型执行任务时，必须提供对应 API Key。若本地算力足够，也可以本地部署模型。
@@ -121,7 +121,7 @@ url: http://127.0.0.1:18789/
   - 或者访问 http://127.0.0.1:18789/
 - [ ] Workspace 目录已创建（通常在 `~/.openclaw/workspace`）
 
-<img src="https://timisic.oss-cn-hangzhou.aliyuncs.com/pic/image-20260304102831261.png" alt="image-20260304102831261" style="zoom:33%;" />
+<img src="https://timisic.oss-cn-hangzhou.aliyuncs.com/pic/image-20260304102831261.png" alt="image-20260304102831261" style="zoom:40%;" />
 
 ---
 
